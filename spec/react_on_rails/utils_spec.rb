@@ -5,6 +5,16 @@ require_relative "spec_helper"
 # rubocop:disable Metrics/ModuleLength, Metrics/BlockLength
 module ReactOnRails
   RSpec.describe Utils do
+
+    it "DOES WHAT I WANT IT TO", :focus do
+      doubled_spec = instance_double(Gem::Specification)
+      allow(Gem::Specification).to receive(:find_all_by_name).with("react_on_rails_pro").and_return([doubled_spec])
+      expect(Gem::Specification).to receive(:find_all_by_name)
+      allow(doubled_spec).to receive(:version).and_return("1.1.1")
+      expect(doubled_spec).to receive(:version)
+      expect(ReactOnRails::Helper.rails_context).to eq({what: "xD"})
+    end
+
     before do
       allow(Rails).to receive(:root).and_return(File.expand_path("."))
       described_class.instance_variable_set(:@server_bundle_path, nil)
